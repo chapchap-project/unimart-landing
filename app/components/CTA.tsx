@@ -30,7 +30,7 @@ export function CTA() {
 
             <h2 className="text-4xl md:text-7xl font-black leading-tight">Join the <br /> Launch List</h2>
             <p className="text-xl text-white/80 max-w-xl mx-auto font-medium">
-              We're launching in just 5 days! Be the first to experience the future of campus shopping.
+              We're launching in just 15 days! Be the first to experience the future of campus shopping.
             </p>
 
             <div className="w-full flex justify-center">
