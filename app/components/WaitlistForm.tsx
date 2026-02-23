@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { joinWaitlist } from "@/app/actions/waitlist";
 
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
@@ -18,18 +18,12 @@ export function WaitlistForm() {
     setErrorMessage("");
 
     try {
-      const { error } = await supabase
-        .from("waitlist")
-        .insert([{ email, created_at: new Date().toISOString() }]);
+      const { success, error } = await joinWaitlist(email);
 
       if (error) {
-        if (error.code === "23505") {
-          setErrorMessage("You're already on the list! ✨");
-        } else {
-          setErrorMessage("Something went wrong. Please try again.");
-        }
+        setErrorMessage(error);
         setStatus("error");
-      } else {
+      } else if (success) {
         setStatus("success");
         setEmail("");
       }
