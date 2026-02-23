@@ -20,7 +20,7 @@ export function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-100 bg-emerald-50 text-xs font-semibold text-emerald-700">
             <Zap className="w-3 h-3 fill-emerald-600" />
-            <span>Launching in 5 Days - Join the VIP Waitlist</span>
+            <span>Launching in 15 Days - Join the VIP Waitlist</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-gray-900">
