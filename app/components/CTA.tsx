@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Apple, Play } from "lucide-react";
+import { WaitlistForm } from "./WaitlistForm";
 
 export function CTA() {
   return (
@@ -20,7 +20,7 @@ export function CTA() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-3xl -mr-32 -mt-32 rounded-full" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 blur-3xl -ml-32 -mb-32 rounded-full" />
 
-          <div className="relative z-10 space-y-12">
+          <div className="relative z-10 space-y-12 text-center flex flex-col items-center">
             <div className="absolute -top-20 -left-10 w-32 h-32 rotate-12 opacity-20 hidden lg:block">
               <img src="/profile.png" alt="Profile" className="rounded-3xl shadow-2xl border-4 border-white/20" />
             </div>
@@ -28,20 +28,13 @@ export function CTA() {
               <img src="/listing.png" alt="Listing" className="rounded-3xl shadow-2xl border-4 border-white/20" />
             </div>
 
-            <h2 className="text-4xl md:text-7xl font-black leading-tight">Ready to start <br /> Shopping?</h2>
+            <h2 className="text-4xl md:text-7xl font-black leading-tight">Join the <br /> Launch List</h2>
             <p className="text-xl text-white/80 max-w-xl mx-auto font-medium">
-              Join thousands of happy shoppers today. Download Unimart and experience the future.
+              We're launching in just 5 days! Be the first to experience the future of campus shopping.
             </p>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              <button className="w-full md:w-auto px-10 py-5 rounded-3xl bg-white text-emerald-600 font-black text-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 shadow-2xl flex items-center justify-center gap-3">
-                <Apple className="w-7 h-7 fill-emerald-600" />
-                App Store
-              </button>
-              <button className="w-full md:w-auto px-10 py-5 rounded-3xl bg-[#1a1a1a] text-white font-black text-xl hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-2xl border border-white/10 flex items-center justify-center gap-3">
-                <Play className="w-7 h-7 fill-white" />
-                Play Store
-              </button>
+            <div className="w-full flex justify-center">
+              <WaitlistForm />
             </div>
 
             <div className="pt-8 text-sm font-bold text-white/60 flex items-center justify-center gap-8 uppercase tracking-[0.2em]">

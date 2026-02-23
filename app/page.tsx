@@ -7,10 +7,10 @@ import { Footer } from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-indigo-500 selection:text-white">
+    <main className="min-h-screen bg-white text-gray-900 selection:bg-emerald-500 selection:text-white">
       <Navbar />
       <Hero />
-      <div className="bg-grid absolute inset-0 -z-20 opacity-20 pointer-events-none" />
+      <div className="bg-grid fixed inset-0 -z-20 opacity-[0.03] pointer-events-none" />
       <Features />
       <MockupShowcase />
       <CTA />

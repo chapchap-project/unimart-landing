@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Unimart | The Future of Seamless Shopping",
   description: "Experience the next-generation marketplace. Fast, secure, and stylish shopping delivered to your doorstep.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

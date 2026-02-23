@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, Play, ShoppingBag, Shield, Zap } from "lucide-react";
+import { ShoppingBag, Shield, Zap } from "lucide-react";
+import { WaitlistForm } from "./WaitlistForm";
 
 export function Hero() {
   return (
@@ -19,7 +20,7 @@ export function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-100 bg-emerald-50 text-xs font-semibold text-emerald-700">
             <Zap className="w-3 h-3 fill-emerald-600" />
-            <span>The Future of Shopping is Here</span>
+            <span>Launching in 5 Days - Join the VIP Waitlist</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-gray-900">
@@ -33,19 +34,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-            <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-emerald-600 text-white font-bold text-lg hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-200 flex items-center justify-center gap-2 relative overflow-hidden group/btn">
-              <Download className="w-5 h-5" />
-              Download for Android
-              <motion.div
-                animate={{ x: ["-100%", "200%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 3 }}
-                className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"
-              />
-            </button>
-            {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full border border-gray-200 bg-white text-gray-900 font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm"> */}
-            {/*   <Play className="w-5 h-5 fill-gray-900" /> */}
-            {/*   Watch Demo */}
-            {/* </button> */}
+            <WaitlistForm />
           </div>
         </motion.div>
 

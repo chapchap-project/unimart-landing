@@ -1,27 +1,118 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { name: "Features", href: "#features" },
+  { name: "Showcase", href: "#showcase" },
+];
 
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToWaitlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const heroSection = document.querySelector("section");
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
-          <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center font-black text-white shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled 
+          ? "bg-white/80 backdrop-blur-md border-b border-gray-100 py-4" 
+          : "bg-transparent py-6"
+      )}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link 
+          href="/" 
+          className="text-2xl font-bold tracking-tight text-gray-900 flex items-center gap-2 group"
+        >
+          <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-emerald-200 group-hover:scale-110 transition-transform duration-300">
             U
           </div>
-          <span>Unimart</span>
+          <span className="hidden sm:inline-block">Unimart</span>
         </Link>
+
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#features" className="text-sm font-medium text-gray-700 hover:text-emerald-600 transition-colors">Features</Link>
-          <Link href="#showcase" className="text-sm font-medium text-gray-700 hover:text-emerald-600 transition-colors">Showcase</Link>
-          <button className="bg-emerald-600 text-white px-5 py-2.5 rounded-full font-semibold flex items-center gap-2 hover:bg-emerald-700 transition-all text-sm shadow-lg shadow-emerald-200">
-            <Download className="w-4 h-4" />
-            Download Now
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-sm font-semibold text-gray-600 hover:text-emerald-600 transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
+          <button 
+            onClick={scrollToWaitlist}
+            className="bg-emerald-600 text-white px-6 py-2.5 rounded-full font-bold flex items-center gap-2 hover:bg-emerald-700 transition-all text-sm shadow-xl shadow-emerald-200 active:scale-95"
+          >
+            Join Waitlist
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden p-2 text-gray-600 hover:text-emerald-600 transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
+          >
+            <div className="container mx-auto px-4 py-8 flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-lg font-bold text-gray-900 hover:text-emerald-600 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <button 
+                onClick={scrollToWaitlist}
+                className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all text-lg shadow-xl shadow-emerald-200"
+              >
+                Join Waitlist
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
