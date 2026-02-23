@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
-import { joinWaitlist } from "@/app/actions/waitlist";
 
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
@@ -18,12 +17,18 @@ export function WaitlistForm() {
     setErrorMessage("");
 
     try {
-      const { success, error } = await joinWaitlist(email);
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-      if (error) {
-        setErrorMessage(error);
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.error || "Something went wrong.");
         setStatus("error");
-      } else if (success) {
+      } else {
         setStatus("success");
         setEmail("");
       }

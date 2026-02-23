@@ -4,7 +4,6 @@ import {
   Head,
   Heading,
   Html,
-  Img,
   Link,
   Preview,
   Section,
@@ -41,14 +40,14 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
             meantime, follow us for updates and early sneak peeks.
           </Text>
         </Section>
-        <Section style={btnContainer}>
-          <Link
-            style={button}
-            href="https://unimart.example.com"
-          >
-            Visit Our Website
-          </Link>
-        </Section>
+        {/* <Section style={btnContainer}> */}
+        {/*   <Link */}
+        {/*     style={button} */}
+        {/*     href="https://unimart.example.com" */}
+        {/*   > */}
+        {/*     Visit Our Website */}
+        {/*   </Link> */}
+        {/* </Section> */}
         <Text style={footer}>
           Unimart &copy; {new Date().getFullYear()} • The Student Marketplace
         </Text>
