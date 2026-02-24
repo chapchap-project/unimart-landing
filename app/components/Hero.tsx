@@ -1,15 +1,64 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShoppingBag, Shield, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingBag, Shield, Zap, Rocket } from "lucide-react";
 import { WaitlistForm } from "./WaitlistForm";
+import { useCountdown } from "@/lib/hooks/useCountdown";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export function Hero() {
+  const { daysRemaining, isLaunched } = useCountdown();
+  const [particles, setParticles] = useState<{x: string, duration: number, delay: number}[]>([]);
+
+  useEffect(() => {
+    const generatedParticles = [...Array(20)].map(() => ({
+      x: `${Math.random() * 100}vw`,
+      duration: 2 + Math.random() * 2,
+      delay: Math.random() * 2,
+    }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(generatedParticles);
+  }, []);
+
   return (
     <section className="relative min-h-screen pt-40 pb-20 px-4 overflow-hidden bg-[#fafafa]">
       {/* Background blobs */}
       <div className="absolute top-0 -left-4 w-96 h-96 bg-emerald-100 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-40 -right-4 w-96 h-96 bg-green-50 blur-[120px] rounded-full -z-10" />
+
+      {/* Launch Animation Elements */}
+      <AnimatePresence>
+        {isLaunched && (
+          <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
+            {particles.map((particle, i) => (
+              <motion.div
+                key={i}
+                initial={{ 
+                  opacity: 0, 
+                  y: "100vh",
+                  x: particle.x,
+                  scale: 0.5,
+                  rotate: 0
+                }}
+                animate={{ 
+                  opacity: [0, 1, 0], 
+                  y: "-10vh",
+                  rotate: 360,
+                  scale: [0.5, 1.5, 0.5]
+                }}
+                transition={{ 
+                  duration: particle.duration,
+                  repeat: Infinity,
+                  delay: particle.delay,
+                  ease: "easeOut"
+                }}
+                className="absolute w-4 h-4 bg-emerald-500 rounded-sm"
+              />
+            ))}
+          </div>
+        )}
+      </AnimatePresence>
 
       <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <motion.div
@@ -18,10 +67,25 @@ export function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-100 bg-emerald-50 text-xs font-semibold text-emerald-700">
-            <Zap className="w-3 h-3 fill-emerald-600" />
-            <span>Launching in 15 Days - Join the VIP Waitlist</span>
-          </div>
+          <motion.div 
+            animate={isLaunched ? {
+              scale: [1, 1.05, 1],
+              transition: { repeat: Infinity, duration: 2 }
+            } : {}}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-100 bg-emerald-50 text-xs font-semibold text-emerald-700"
+          >
+            {isLaunched ? (
+              <>
+                <Rocket className="w-3 h-3 text-emerald-600 animate-bounce" />
+                <span>We Are Live! Join the Community Now</span>
+              </>
+            ) : (
+              <>
+                <Zap className="w-3 h-3 fill-emerald-600" />
+                <span>Launching in {daysRemaining} {daysRemaining === 1 ? 'Day' : 'Days'} - Join the VIP Waitlist</span>
+              </>
+            )}
+          </motion.div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-gray-900">
             Experience <br />
@@ -64,9 +128,12 @@ export function Hero() {
               {/* Glass reflection effect */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem] z-20 pointer-events-none shadow-inner" />
 
-              <img
+              <Image
                 src="/Home.png"
                 alt="Unimart App Home"
+                width={320}
+                height={640}
+                priority
                 className="w-[320px] h-auto rounded-[2.5rem] shadow-[0_50px_100px_rgba(0,0,0,0.15)] border-4 border-white"
               />
 

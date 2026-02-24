@@ -2,8 +2,12 @@
 
 import { motion } from "framer-motion";
 import { WaitlistForm } from "./WaitlistForm";
+import { useCountdown } from "@/lib/hooks/useCountdown";
+import Image from "next/image";
 
 export function CTA() {
+  const { daysRemaining, isLaunched } = useCountdown();
+
   return (
     <section className="py-32 relative overflow-hidden bg-white">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-emerald-50 blur-[150px] rounded-full -z-10" />
@@ -22,15 +26,20 @@ export function CTA() {
 
           <div className="relative z-10 space-y-12 text-center flex flex-col items-center">
             <div className="absolute -top-20 -left-10 w-32 h-32 rotate-12 opacity-20 hidden lg:block">
-              <img src="/profile.png" alt="Profile" className="rounded-3xl shadow-2xl border-4 border-white/20" />
+              <Image src="/profile.png" alt="Profile" width={128} height={128} className="rounded-3xl shadow-2xl border-4 border-white/20" />
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 -rotate-12 opacity-20 hidden lg:block">
-              <img src="/listing.png" alt="Listing" className="rounded-3xl shadow-2xl border-4 border-white/20" />
+              <Image src="/listing.png" alt="Listing" width={160} height={160} className="rounded-3xl shadow-2xl border-4 border-white/20" />
             </div>
 
-            <h2 className="text-4xl md:text-7xl font-black leading-tight">Join the <br /> Launch List</h2>
+            <h2 className="text-4xl md:text-7xl font-black leading-tight">
+              {isLaunched ? "We Are Live!" : "Join the Launch List"}
+            </h2>
             <p className="text-xl text-white/80 max-w-xl mx-auto font-medium">
-              We're launching in just 15 days! Be the first to experience the future of campus shopping.
+              {isLaunched 
+                ? "Unimart is now officially live! Join the campus shopping revolution today."
+                : `We're launching in just ${daysRemaining} ${daysRemaining === 1 ? 'day' : 'days'}! Be the first to experience the future of campus shopping.`
+              }
             </p>
 
             <div className="w-full flex justify-center">

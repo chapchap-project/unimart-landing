@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const showcaseItems = [
   {
@@ -90,9 +91,11 @@ export function MockupShowcase() {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="perspective-[1000px] transform-gpu relative z-20"
               >
-                <img 
+                <Image 
                   src="/shop.png" 
                   alt="App Interface"
+                  width={350}
+                  height={700}
                   className="w-[280px] md:w-[320px] lg:w-[350px] h-auto rounded-[2.5rem] shadow-[0_50px_100px_rgba(0,0,0,0.1)] border-4 border-white mx-auto"
                 />
               </motion.div>
@@ -106,9 +109,11 @@ export function MockupShowcase() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 className="absolute -right-4 lg:-right-8 top-10 w-[180px] lg:w-[220px] z-30 hidden sm:block"
               >
-                <img 
+                <Image 
                   src="/listing.png"
                   alt="Product Listing"
+                  width={220}
+                  height={440}
                   className="rounded-3xl shadow-2xl border-4 border-white"
                 />
               </motion.div>
@@ -122,9 +127,11 @@ export function MockupShowcase() {
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="absolute -left-4 lg:-left-12 bottom-10 w-[160px] lg:w-[200px] z-10 hidden sm:block"
               >
-                <img 
+                <Image 
                   src="/wishlist.png"
                   alt="Wishlist"
+                  width={200}
+                  height={400}
                   className="rounded-3xl shadow-2xl border-4 border-white opacity-90"
                 />
               </motion.div>
@@ -138,9 +145,11 @@ export function MockupShowcase() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                 className="absolute right-0 bottom-0 w-[140px] lg:w-[160px] z-40 hidden md:block"
               >
-                <img 
+                <Image 
                   src="/cart.png"
                   alt="Shopping Cart"
+                  width={160}
+                  height={320}
                   className="rounded-3xl shadow-2xl border-4 border-white"
                 />
               </motion.div>

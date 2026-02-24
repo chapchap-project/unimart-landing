@@ -4,7 +4,6 @@ import {
   Head,
   Heading,
   Html,
-  Link,
   Preview,
   Section,
   Text,
@@ -24,30 +23,22 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
         <Section style={logoContainer}>
           <Text style={logo}>Unimart</Text>
         </Section>
-        <Heading style={h1}>You're officially on the list!</Heading>
+        <Heading style={h1}>You&apos;re officially on the list!</Heading>
         <Text style={text}>
           Hi {email?.split("@")[0] || "there"},
         </Text>
         <Text style={text}>
-          Thanks for joining the Unimart waitlist. We're building the ultimate
-          shopping experience for students, and we're so excited to have you with
+          Thanks for joining the Unimart waitlist. We&apos;re building the ultimate
+          shopping experience for students, and we&apos;re so excited to have you with
           us.
         </Text>
         <Section style={featureSection}>
-          <Text style={featureTitle}>What's next?</Text>
+          <Text style={featureTitle}>What&apos;s next?</Text>
           <Text style={text}>
-            We'll notify you as soon as we're ready for you to join. In the
+            We&apos;ll notify you as soon as we&apos;re ready for you to join. In the
             meantime, follow us for updates and early sneak peeks.
           </Text>
         </Section>
-        {/* <Section style={btnContainer}> */}
-        {/*   <Link */}
-        {/*     style={button} */}
-        {/*     href="https://unimart.example.com" */}
-        {/*   > */}
-        {/*     Visit Our Website */}
-        {/*   </Link> */}
-        {/* </Section> */}
         <Text style={footer}>
           Unimart &copy; {new Date().getFullYear()} • The Student Marketplace
         </Text>
@@ -109,23 +100,6 @@ const featureTitle = {
   fontWeight: "bold",
   color: "#065f46", // emerald-800
   margin: "0 0 10px 0",
-};
-
-const btnContainer = {
-  textAlign: "center" as const,
-  margin: "32px 0",
-};
-
-const button = {
-  backgroundColor: "#059669", // emerald-600
-  borderRadius: "9999px",
-  color: "#fff",
-  fontSize: "16px",
-  fontWeight: "bold",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "inline-block",
-  padding: "12px 32px",
 };
 
 const footer = {

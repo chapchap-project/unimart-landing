@@ -51,7 +51,7 @@ export function WaitlistForm() {
             className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center gap-3 text-emerald-700"
           >
             <CheckCircle2 className="w-5 h-5" />
-            <p className="font-semibold text-sm">You're on the list! We'll notify you soon.</p>
+            <p className="font-semibold text-sm">You&apos;re on the list! We&apos;ll notify you soon.</p>
           </motion.div>
         ) : (
           <motion.form
